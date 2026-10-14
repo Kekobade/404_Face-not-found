@@ -429,51 +429,5 @@ document.querySelectorAll('#scene-bar button').forEach(b => b.addEventListener('
   }
 }));
 
-// Bundles external CSS, JS, and sliced base64 panels into a single standalone .HTML file
-$('dl').addEventListener('click', async () => {
-  let cssText = '', jsText = '';
-  try {
-    const [cssRes, jsRes] = await Promise.all([fetch('style.css'), fetch('theme.js')]);
-    cssText = await cssRes.text();
-    jsText = await jsRes.text();
-  } catch (e) {
-    // Fallback if opened via file:// protocol where fetch is blocked
-    for (const sheet of document.styleSheets) {
-      try {
-        if (sheet.href && sheet.href.includes('style.css')) {
-          cssText = Array.from(sheet.cssRules).map(r => r.cssText).join('\n');
-        }
-      } catch (err) {}
-    }
-  }
-
-  const clone = document.documentElement.cloneNode(true);
-  clone.querySelectorAll('# stage .win').forEach(w => w.remove());
-  const ov = clone.querySelector('#ov');
-  if (ov) ov.style.display = 'flex';
-
-  const linkTag = clone.querySelector('link[href="style.css"]');
-  if (linkTag && cssText) {
-    const styleEl = document.createElement('style');
-    styleEl.textContent = cssText;
-    linkTag.replaceWith(styleEl);
-  }
-
-  const scriptTag = clone.querySelector('script[src="theme.js"]');
-  if (scriptTag) {
-    const inlineScript = document.createElement('script');
-    const savedPanelsCode = `window.SAVED_PANELS = ${JSON.stringify(PANELS)};\n`;
-    inlineScript.textContent = savedPanelsCode + (jsText || '');
-    scriptTag.replaceWith(inlineScript);
-  }
-
-  const blob = new Blob(['<!doctype html>\n' + clone.outerHTML], { type: 'text/html' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = '404_Face_Not_Found_Complete.html';
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-});
 
 requestAnimationFrame(tick);
