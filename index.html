@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404: Face Not Found</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<h1>404: FACE NOT FOUND</h1>
+<div class="row">
+  <label class="btn">📁 LOAD 3×3 PNG GRID<input id="up" type="file" accept="image/*" hidden></label>
+  <button id="mode-game" class="act">🎮 PLAY GAME</button>
+  <button id="mode-gif">🎞️ GIF LOOP MODE</button>
+  <button id="dl">💾 SAVE .HTML FILE</button>
+</div>
+<div class="row" id="scene-bar">
+  <button data-s="auto" class="act">AUTO</button>
+  <button data-s="0">1:404</button><button data-s="1">2:MELT</button><button data-s="2">3:MOTH</button>
+  <button data-s="3">4:GONE</button><button data-s="4">5:EYES</button><button data-s="5">6:PIXEL</button>
+  <button data-s="6">7:GLINT</button><button data-s="7">8:REMEMBER</button><button data-s="8">9:TORN</button>
+</div>
+<div id="hud"><span>MEMORY</span><div id="bar"><div id="fill"></div></div><span id="pc">100%</span><span id="tm">60s</span></div>
+<div id="frame">
+  <div id="stage">
+    <canvas id="c" width="160" height="160"></canvas>
+    <div id="spark">✦</div>
+    <div id="ov">
+      <h2>I'M SLOWLY FORGETTING<br>YOUR FACE.</h2>
+      <p>Load your 3×3 pixel-art grid (<b>image_599d66.png</b>) using the button above to slice all 9 scenes into one animation, or press START immediately. Close 404 popups and catch ✦ sparkles before her memory tears away.</p>
+      <button id="go" style="font-size:10px;padding:10px 18px;background:var(--d);color:var(--bg)">START</button>
+    </div>
+  </div>
+</div>
+<small style="font-size:7px;opacity:.75">BEST: <span id="best">0</span> pts | CLEARED: <span id="cl">0</span></small>
+
+<link rel="stylesheet" href="style.css">
+<script src="theme.js" defer></script>
+</body>
+</html>
